@@ -12,6 +12,12 @@ public class Main {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("Adventure Game");
+
+        Panel panel = new Panel();
+        window.add(panel);
+
+
+        window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
