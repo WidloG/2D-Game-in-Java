@@ -8,6 +8,7 @@ import java.awt.*;
 
 public class Panel extends JPanel implements Runnable {
 
+    //screen
     final int tileSizeOG = 16;
     final int scale = 3;
     public final int tileSize = tileSizeOG * scale; //48px
@@ -18,11 +19,17 @@ public class Panel extends JPanel implements Runnable {
     public final int panelWidth =  tileSize * screenColumns;
     public final int panelHeight = tileSize * screenRows;
 
-    int FPS = 60;
+    //world map
+    public final int worldCol = 50;
+    public final int worldRow = 50;
+    public final int worldWidth = tileSize * worldCol;
+    public final int worldHeight = tileSize * worldRow;
+
+    int FPS = 30;
     Thread mainThread;
 
     KeyboardInput key = new KeyboardInput();
-    Player player = new Player(this, key);
+    public Player player = new Player(this, key);
     Manager tile = new Manager(this);
 
 

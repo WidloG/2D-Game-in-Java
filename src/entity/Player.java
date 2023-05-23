@@ -12,18 +12,25 @@ public class Player extends Entity{
     Panel panel;
     KeyboardInput key;
 
+    public final int screenX;
+    public final int screenY;
+
     public Player(Panel panel, KeyboardInput key){
         this.panel = panel;
         this.key = key;
 
+        screenY = panel.panelHeight/2 - (panel.tileSize/2);
+        screenX = panel.panelWidth/2 - (panel.tileSize/2);
+
         setValues();
         getImage();
+
     }
 
     public void setValues() {
-        x = 100;
-        y = 100;
-        speed = 4;
+        worldX = panel.tileSize * 26;
+        worldY = panel.tileSize * 26;
+        speed = 5;
         direction = "left";
     }
 
@@ -46,19 +53,19 @@ public class Player extends Entity{
         if(key.up || key.down || key.right || key.left) {
             if (key.up) {
                 direction = "up";
-                y -= speed;
+                worldY -= speed;
             }
             if (key.down) {
                 direction = "down";
-                y += speed;
+                worldY += speed;
             }
             if (key.left) {
                 direction = "left";
-                x -= speed;
+                worldX -= speed;
             }
             if (key.right) {
                 direction = "right";
-                x += speed;
+                worldX += speed;
             }
 
             spriteCounter++;
@@ -94,7 +101,7 @@ public class Player extends Entity{
             }
         }
 
-        g2.drawImage(image, x, y, panel.tileSize, panel.tileSize, null);
+        g2.drawImage(image, screenX, screenY, panel.tileSize, panel.tileSize, null);
 
     }
 }
