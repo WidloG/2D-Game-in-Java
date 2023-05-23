@@ -1,5 +1,7 @@
 package main;
 
+import entity.Player;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,7 +9,7 @@ public class Panel extends JPanel implements Runnable {
 
     final int tileSizeOG = 16;
     final int scale = 3;
-    final int tileSize = tileSizeOG * scale; //96px
+    public final int tileSize = tileSizeOG * scale; //96px
 
     final int screenColumns = 16;
     final int screenRows = 12;
@@ -15,14 +17,12 @@ public class Panel extends JPanel implements Runnable {
     final int panelWidth =  tileSize * screenColumns;
     final int panelHeight = tileSize * screenRows;
 
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 4;
-
     int FPS = 60;
+    Thread mainThread;
 
     KeyboardInput key = new KeyboardInput();
-    Thread mainThread;
+    Player player = new Player(this, key);
+
 
     //Panel options
     public Panel(){
@@ -30,6 +30,7 @@ public class Panel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(key);
         this.setFocusable(true);
+        this.setBackground(Color.black);
     }
 
     //Time management
@@ -68,10 +69,7 @@ public class Panel extends JPanel implements Runnable {
 
     //Update of position
     public void update(){
-        if(key.up) playerY -= playerSpeed;
-        if(key.down) playerY += playerSpeed;
-        if(key.left) playerX -= playerSpeed;
-        if(key.right) playerX += playerSpeed;
+        player.update();
     }
 
     //Drawing
@@ -79,8 +77,7 @@ public class Panel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        g2.setColor(Color.white);
-        g2.fillRect(playerX, playerY, tileSize, tileSize);
+        player.draw(g2);
         g2.dispose();
 
     }
