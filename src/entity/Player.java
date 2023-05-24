@@ -22,6 +22,8 @@ public class Player extends Entity{
         screenY = panel.panelHeight/2 - (panel.tileSize/2);
         screenX = panel.panelWidth/2 - (panel.tileSize/2);
 
+        solid = new Rectangle(8, 16, 32, 32);
+
         setValues();
         getImage();
 
@@ -51,22 +53,26 @@ public class Player extends Entity{
 
     public void update(){
         if(key.up || key.down || key.right || key.left) {
-            if (key.up) {
-                direction = "up";
-                worldY -= speed;
+            if (key.up) direction = "up";
+            if (key.down) direction = "down";
+            if (key.left) direction = "left";
+            if (key.right) direction = "right";
+
+
+            //Player Colissions with tiles
+            collision = false;
+            panel.collisionCheck.checkTile(this);
+
+            if(!collision){
+                switch (direction) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
             }
-            if (key.down) {
-                direction = "down";
-                worldY += speed;
-            }
-            if (key.left) {
-                direction = "left";
-                worldX -= speed;
-            }
-            if (key.right) {
-                direction = "right";
-                worldX += speed;
-            }
+
+            //Walking visualization
 
             spriteCounter++;
             if (spriteCounter > 12 - speed) {

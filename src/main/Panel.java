@@ -31,6 +31,7 @@ public class Panel extends JPanel implements Runnable {
     KeyboardInput key = new KeyboardInput();
     public Player player = new Player(this, key);
     Manager tile = new Manager(this);
+    public Collision collisionCheck = new Collision(this);
 
 
     //Panel options

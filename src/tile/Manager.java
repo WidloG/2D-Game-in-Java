@@ -13,8 +13,8 @@ import java.util.Objects;
 public class Manager {
 
     Panel panel;
-    Tile[] tile;
-    int[][] mapNum;
+    public Tile[] tile;
+    public int[][] mapNum;
 
     public Manager(Panel panel) {
         this.panel = panel;
@@ -44,9 +44,11 @@ public class Manager {
 
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("backgroundIMG/wood.png")));
+            tile[2].collision = true;
 
             tile[3] = new Tile();
             tile[3].image = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("backgroundIMG/tree.png")));
+            tile[3].collision = true;
 
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("backgroundIMG/bush.png")));
