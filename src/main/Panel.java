@@ -1,6 +1,7 @@
 package main;
 
 import entity.Player;
+import object.parentObject;
 import tile.Manager;
 
 import javax.swing.*;
@@ -32,7 +33,8 @@ public class Panel extends JPanel implements Runnable {
     public Player player = new Player(this, key);
     Manager tile = new Manager(this);
     public Collision collisionCheck = new Collision(this);
-
+    public parentObject[] object = new parentObject[10];
+    public AssetObject asset = new AssetObject(this);
 
     //Panel options
     public Panel(){
@@ -41,6 +43,10 @@ public class Panel extends JPanel implements Runnable {
         this.addKeyListener(key);
         this.setFocusable(true);
         this.setBackground(Color.black);
+    }
+
+    public void setupGame(){
+        asset.setObject();
     }
 
     //Time management
@@ -88,6 +94,9 @@ public class Panel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
 
         tile.draw(g2);
+        for (object.parentObject parentObject : object) {
+            if (parentObject != null) parentObject.draw(g2, this);
+        }
         player.draw(g2);
         g2.dispose();
 
